@@ -49,7 +49,7 @@
         <span class="accent">Itzamiii!</span>
         <span>Privacy Policy</span>
       </div>
-      <div class="sub">Last updated: August 11, 2025</div>
+      <div class="sub">Last updated: August 18, 2025</div>
     </header>
 
     <section class="card">
@@ -62,6 +62,18 @@
       <ul>
         <li><strong>Click counts on games</strong> – We track the total number of clicks on game entries to measure overall popularity. This data is <em>aggregated</em> and <em>not linked</em> to any individual user.</li>
         <li><strong>Followed game identifiers</strong> – If you enable notifications for games you follow, we store the identifiers (IDs) of those games to send relevant alerts about new offers.</li>
+        <li><strong>Push notification token (FCM)</strong> – If you enable notifications, the app obtains and stores a Firebase Cloud Messaging (FCM) token from your device. This token is used solely to deliver push notifications and is not linked to your personal identity.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Information We Do Not Collect</h2>
+      <p>This section is provided to explicitly clarify the types of data we do not collect from our users.</p>
+      <ul>
+        <li><strong>No personal identification data</strong> – We do not collect names, email addresses, phone numbers, or any other personally identifiable information.</li>
+        <li><strong>No payment information</strong> – We do not collect credit card details, banking data, or any other financial information.</li>
+        <li><strong>No location data</strong> – We do not track your GPS location or store your geographic position.</li>
+        <li><strong>No browsing activity outside the app</strong> – We do not monitor or collect information about how you use other apps or websites.</li>
       </ul>
     </section>
 
@@ -70,6 +82,7 @@
       <ul>
         <li>Improve the app experience by understanding overall game popularity.</li>
         <li>Send notifications about price updates and new offers for games you marked as “Following” (only if enabled).</li>
+        <li>Use aggregated click counts to power a future feature that allows sorting games by popularity.</li>
       </ul>
     </section>
 
@@ -86,7 +99,7 @@
     <section class="card">
       <h2>Your Choices</h2>
       <ul>
-        <li>You can disable notifications at any time in the app settings. Doing so stops the storage of followed game identifiers used for notifications.</li>
+        <li>You can disable notifications at any time in the app settings. Doing so stops the storage of followed game identifiers and removes the FCM token associated with your device.</li>
         <li>Because click counts are aggregated and anonymous, they cannot be traced back to you.</li>
       </ul>
     </section>
