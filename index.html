@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Itzamiii! eShop Game Prices</title>
+  <title>Itzamiii! eShop Game Deals</title>
   <meta name="description" content="Itzamiii! helps you check Nintendo eShop prices, follow games, and find deals for Nintendo Switch worldwide. You can compare prices across different countries, view historical price data, and follow specific games to get notified when their prices change. The app also shows fresh deals as they appear, so you can stay informed about current promotions. You can create custom search tabs to organize the way you browse, filter results by multiple criteria, and sort games according to your preference. You can select from 20 supported countries and view prices in your local currency. The app includes Dark Mode support and works without the need for a user account. There are NO ADS.">
   <meta name="theme-color" content="#111827">
   <style>
@@ -24,7 +24,13 @@
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
       color: var(--ink);
-      background: linear-gradient(180deg,#f8fafc, #eef2f7 40%, #e6eef3);
+      background-color: #eef4f5;
+      background-image:
+        radial-gradient(circle at 8% 6%, rgba(16, 185, 129, .20), transparent 28rem),
+        radial-gradient(circle at 92% 22%, rgba(59, 130, 246, .14), transparent 26rem),
+        radial-gradient(circle at 50% 100%, rgba(20, 184, 166, .12), transparent 32rem),
+        linear-gradient(145deg, #f8fafc 0%, #edf5f5 48%, #e7eef8 100%);
+      background-attachment: fixed;
     }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
@@ -43,70 +49,91 @@
     .subtitle { color: var(--muted); font-size: clamp(14px, 2.2vw, 18px); }
     .cta { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
 
-    .btn {
-      appearance: none; border: 0; background: var(--accent);
-      color: #fff; font-weight: 700; padding: 12px 16px; border-radius: 999px;
-      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-      box-shadow: 0 6px 20px var(--ring);
-      transition: transform .05s ease, box-shadow .2s ease, background .15s ease;
-    }
-    .btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
-    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 28px var(--ring); }
-    .btn.secondary { background: #111827; }
-    .btn small { font-weight: 600; opacity:.9; }
+    .google-play-badge { display: block; width: 180px; height: auto; }
+    .google-play-link { border-radius: 6px; display: inline-block; }
+    .google-play-link:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 
     section { margin: 28px 0; }
     .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
 
     /* Carousel */
-    .carousel { position: relative; overflow: hidden; border-radius: var(--radius); background:#fff; }
-    .track { display: flex; transition: transform .35s ease; }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: calc(var(--radius) - 4px);
+      background: linear-gradient(145deg, #eff6ff, #f0fdf4);
+      isolation: isolate;
+    }
+    .carousel:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; }
+    .track { display: flex; transition: transform .55s cubic-bezier(.22, 1, .36, 1); }
     .slide {
       flex: 0 0 100%;
       min-width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      padding: 22px 64px 54px;
     }
     .slide img {
       max-width: 100%;
-      max-height: 92vh;   /* ajuste aqui (ex.: 80vh para mais alto, 60vh para menor) */
+      max-height: min(76vh, 800px);
       width: auto;
       height: auto;
       object-fit: contain;
-      border-radius: 10px;
+      border-radius: 14px;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, .20);
     }
-    .controls { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+    .controls { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; padding: 16px; pointer-events: none; }
     .ctrl-btn {
-      pointer-events: auto; border: 0; background: #fff;
-      font-size: 40px;
-      width: 70px; height: 70px; border-radius: 999px; cursor: pointer;
+      pointer-events: auto;
+      width: 46px; height: 46px;
+      border: 1px solid rgba(255, 255, 255, .65);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(15, 23, 42, .72);
+      backdrop-filter: blur(8px);
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
       display: grid; place-items: center;
+      transition: transform .2s ease, background .2s ease;
     }
-    .dots { display: none; gap: 8px; justify-content: center; padding: 12px 0 0; }
-    .dot { width: 10px; height: 10px; border-radius: 999px; background: #cbd5e1; cursor: pointer; }
-    .dot.active { background: var(--accent); }
-
-    .video-wrap{
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 -> 9/16 = 0.5625 */
-      height: 0;
-    }
-    .video-wrap iframe{
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      border: 0;
-    }
+    .ctrl-btn:hover { background: #111827; transform: scale(1.08); }
+    .ctrl-btn:focus-visible, .dot:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .dots { position: absolute; z-index: 1; bottom: 20px; left: 50%; display: flex; gap: 7px; transform: translateX(-50%); }
+    .dot { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 999px; background: rgba(15, 23, 42, .25); cursor: pointer; transition: width .25s ease, background .25s ease; }
+    .dot.active { width: 24px; background: var(--accent); }
+    .carousel-status { position: absolute; z-index: 1; right: 20px; bottom: 16px; color: #475569; font-size: 13px; font-weight: 700; }
 
     footer {
-      color: #6b7280; font-size: 14px; text-align: center; padding: 24px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 28px;
+      padding: 24px;
+      color: #d1d5db;
+      background: #111827;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-logo { width: 48px; height: 48px; border-radius: 12px; }
+    .footer-title { color: #fff; font-size: 16px; font-weight: 700; margin: 0; }
+    .footer-copy { font-size: 14px; margin: 4px 0 0; }
+    .footer-download { display: flex; align-items: center; gap: 14px; }
+    .footer-download p { font-size: 14px; margin: 0; text-align: right; }
+    .footer-download .google-play-badge { width: 160px; }
 
     @media (max-width: 640px) {
       header.hero { grid-template-columns: 80px 1fr; padding: 14px; }
       .cta { gap: 8px; }
+      .slide { padding: 16px 16px 48px; }
+      .controls { padding: 8px; }
+      .ctrl-btn { width: 40px; height: 40px; font-size: 24px; }
+      .carousel-status { right: 16px; bottom: 14px; }
+      footer, .footer-download { align-items: flex-start; flex-direction: column; }
+      .footer-download p { text-align: left; }
     }
   </style>
 </head>
@@ -115,24 +142,23 @@
     <header class="hero">
       <img class="logo" src="assets/imgs/icon.png" alt="Itzamiii! app logo">
       <div>
-        <h1>Itzamiii! eShop Game Prices</h1>
+        <h1>Itzamiii! eShop Game Deals</h1>
         <div class="cta">
-          <a class="btn" href="https://play.google.com/store/apps/details?id=com.tkautzmann.itzamiii" target="_blank" rel="noopener noreferrer">
-            Get it on Google Play
+          <a class="google-play-link" href="https://play.google.com/store/apps/details?id=com.tkautzmann.itzamiii" target="_blank" rel="noopener noreferrer">
+            <img class="google-play-badge" src="assets/imgs/disponivel-google-play-badge.png" alt="Disponível no Google Play">
           </a>
         </div>
       </div>
     </header>
 
     <section class="card" aria-labelledby="about-title">
-      <h2 id="about-title" style="margin:0 0 12px">About this app</h2>
-      <p style="margin:0;color:var(--muted)">
-        Itzamiii! helps you check Nintendo eShop prices, follow games, and find deals for Nintendo Switch worldwide. You can compare prices across different countries, view historical price data, and follow specific games to get notified when their prices change. The app also shows fresh deals as they appear, so you can stay informed about current promotions. You can create custom search tabs to organize the way you browse, filter results by multiple criteria, and sort games according to your preference. You can select from 20 supported countries and view prices in your local currency. The app includes Dark Mode support and works without the need for a user account. There are NO ADS.
-      </p>
+      <div style="color:var(--muted)">
+        <p>Itzamiii! helps you check Nintendo eShop prices, follow games, and find the best deals for Nintendo Switch worldwide. Stay updated on discounts, track your favorite titles, and never miss a promotion.</p>
+      </div>
     </section>
 
     <section id="screenshots" class="card" aria-label="App screenshots">
-      <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Itzamiii! screenshots" aria-live="polite">
+      <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Itzamiii! screenshots" aria-live="polite" tabindex="0">
         <div class="track" id="track">
           <div class="slide"><img src="assets/imgs/cards/1.png" alt="Screenshot 1" loading="lazy" decoding="async"></div>
           <div class="slide"><img src="assets/imgs/cards/2.png" alt="Screenshot 2" loading="lazy" decoding="async"></div>
@@ -142,39 +168,55 @@
           <div class="slide"><img src="assets/imgs/cards/6.png" alt="Screenshot 6" loading="lazy" decoding="async"></div>
           <div class="slide"><img src="assets/imgs/cards/7.png" alt="Screenshot 7" loading="lazy" decoding="async"></div>
           <div class="slide"><img src="assets/imgs/cards/8.png" alt="Screenshot 8" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="assets/imgs/cards/9.png" alt="Screenshot 9" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="assets/imgs/cards/10.png" alt="Screenshot 10" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="assets/imgs/cards/11.png" alt="Screenshot 11" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="assets/imgs/cards/12.png" alt="Screenshot 12" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="assets/imgs/cards/13.png" alt="Screenshot 13" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="assets/imgs/cards/14.png" alt="Screenshot 14" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="assets/imgs/cards/15.png" alt="Screenshot 15" loading="lazy" decoding="async"></div>
         </div>
 
         <div class="controls">
-          <button class="ctrl-btn" aria-label="Previous slide" id="prev">◀</button>
-          <button class="ctrl-btn" aria-label="Next slide" id="next">▶</button>
+          <button class="ctrl-btn" aria-label="Previous slide" aria-controls="track" id="prev">&larr;</button>
+          <button class="ctrl-btn" aria-label="Next slide" aria-controls="track" id="next">&rarr;</button>
         </div>
 
-        <!-- 🔧 este elemento faltava e quebrava o JS -->
         <div class="dots" id="dots" aria-label="Slide indicators"></div>
+        <div class="carousel-status" id="carousel-status" aria-hidden="true"></div>
       </div>
     </section>
 
-    <section class="card" aria-labelledby="about-title">
-      <div class="video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/N9mKqKfp1yk?si=OT1seoRKBuvrZngq"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          loading="lazy"></iframe>
+    <section class="card" aria-label="About this app">
+      <div style="color:var(--muted)">
+        <p>Itzamiii! helps you check Nintendo eShop prices, follow games, and find the best deals for Nintendo Switch worldwide. Stay updated on discounts, track your favorite titles, and never miss a promotion.</p>
+        <p>Compare prices across multiple countries, explore historical price data, and receive alerts when the games you follow go on sale. By signing in with a Google account, you can save your followed games to the cloud and keep your list synced across devices.</p>
+        <p>Organize the way you browse by creating custom search tabs, applying multiple filters, and sorting results according to your preferences. The app supports 20 countries and offers its interface in 9 languages: English, Brazilian Portuguese, European Portuguese, European Spanish, Latin American Spanish, Dutch, German, French, and Italian.</p>
+        <p>Itzamiii! also includes Dark Mode, works without the need for a user account for browsing prices, and is completely free of ads.</p>
+        <p>Main features:</p>
+        <ul>
+          <li>Compare Nintendo eShop prices worldwide</li>
+          <li>View historical price data</li>
+          <li>Follow games and save them to your Google account</li>
+          <li>Receive deal alerts for followed games</li>
+          <li>Discover new and ongoing promotions</li>
+          <li>Create custom search tabs</li>
+          <li>Filter and sort search results</li>
+          <li>Support for 20 countries and local currencies</li>
+          <li>Interface available in 9 languages</li>
+          <li>Dark Mode</li>
+          <li>No ads</li>
+        </ul>
+        <p>Itzamiii! is designed for anyone who wants to track Nintendo Switch and Nintendo Switch 2 game prices and get the most out of eShop deals. Download now and start finding your next great deal!</p>
       </div>
     </section>
 
     <footer>
-      <p>Itzamiii! eShop Game Prices</p>
+      <div class="footer-brand">
+        <img class="footer-logo" src="assets/imgs/icon.png" alt="">
+        <div>
+          <p class="footer-title">Itzamiii! eShop Game Deals</p>
+        </div>
+      </div>
+      <div class="footer-download">
+        <p>Download the app<br>on Google Play</p>
+        <a class="google-play-link" href="https://play.google.com/store/apps/details?id=com.tkautzmann.itzamiii" target="_blank" rel="noopener noreferrer">
+          <img class="google-play-badge" src="assets/imgs/disponivel-google-play-badge.png" alt="Dispon&iacute;vel no Google Play">
+        </a>
+      </div>
     </footer>
   </div>
 
@@ -182,8 +224,10 @@
     // Carousel logic (no dependencies)
     (function() {
       const track = document.getElementById('track');
+      const carousel = document.getElementById('carousel');
       const slides = Array.from(track.children);
       const dotsRoot = document.getElementById('dots');
+      const status = document.getElementById('carousel-status');
       const prev = document.getElementById('prev');
       const next = document.getElementById('next');
 
@@ -194,6 +238,7 @@
       function update() {
         track.style.transform = `translateX(${-index * 100}%)`;
         Array.from(dotsRoot.children).forEach((d, i) => d.classList.toggle('active', i === index));
+        status.textContent = `${index + 1} / ${slides.length}`;
       }
 
       // Build dots
@@ -214,7 +259,7 @@
       next.addEventListener('click', () => go(1));
 
       // Keyboard support
-      window.addEventListener('keydown', (e) => {
+      carousel.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') go(-1);
         if (e.key === 'ArrowRight') go(1);
       });
