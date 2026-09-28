@@ -24,27 +24,61 @@
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
       color: var(--ink);
-      background-color: #eef4f5;
+      background-color: #fff8e8;
       background-image:
-        radial-gradient(circle at 8% 6%, rgba(16, 185, 129, .20), transparent 28rem),
-        radial-gradient(circle at 92% 22%, rgba(59, 130, 246, .14), transparent 26rem),
-        radial-gradient(circle at 50% 100%, rgba(20, 184, 166, .12), transparent 32rem),
-        linear-gradient(145deg, #f8fafc 0%, #edf5f5 48%, #e7eef8 100%);
+        radial-gradient(circle at 7% 5%, rgba(255, 193, 48, .28), transparent 29rem),
+        radial-gradient(circle at 94% 25%, rgba(245, 158, 11, .20), transparent 27rem),
+        radial-gradient(circle at 48% 100%, rgba(254, 215, 120, .24), transparent 34rem),
+        linear-gradient(145deg, #fffdf8 0%, #fff7df 48%, #fdf0c8 100%);
       background-attachment: fixed;
     }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
     header.hero {
-      display: grid; grid-template-columns: 120px 1fr; gap: 18px;
+      position: relative;
+      display: grid; grid-template-columns: 120px 1fr; gap: 22px;
       align-items: center; margin-top: 18px; margin-bottom: 28px;
-      background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 24px;
+      background: linear-gradient(125deg, #fffdf7 0%, #fff2bd 58%, #ffd76a 100%);
+      border: 1px solid rgba(180, 83, 9, .18);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 38px rgba(146, 64, 14, .16);
+    }
+    header.hero::before,
+    header.hero::after {
+      position: absolute;
+      content: "";
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    header.hero::before {
+      width: 240px; height: 240px;
+      right: -88px; top: -130px;
+      background: rgba(255, 255, 255, .38);
+    }
+    header.hero::after {
+      width: 130px; height: 130px;
+      right: 12%; bottom: -94px;
+      border: 22px solid rgba(180, 83, 9, .10);
+    }
+    header.hero > * { position: relative; z-index: 1; }
+    header.hero h1 {
+      max-width: 720px;
+      color: #78350f;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
     }
     .logo {
       width: 100%;
       aspect-ratio: 1/1;
       object-fit: cover;
       border-radius: 20px;
+      border: 4px solid rgba(255, 255, 255, .82);
+      box-shadow: 0 12px 24px rgba(120, 53, 15, .22);
+      transform: rotate(-3deg);
+      transition: transform .25s ease;
     }
+    header.hero:hover .logo { transform: rotate(0) scale(1.03); }
     h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.1; margin: 0 0 10px; }
     .subtitle { color: var(--muted); font-size: clamp(14px, 2.2vw, 18px); }
     .cta { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
@@ -61,7 +95,7 @@
       position: relative;
       overflow: hidden;
       border-radius: calc(var(--radius) - 4px);
-      background: linear-gradient(145deg, #eff6ff, #f0fdf4);
+      background: #fff;
       isolation: isolate;
     }
     .carousel:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; }
@@ -153,7 +187,7 @@
 
     <section class="card" aria-labelledby="about-title">
       <div style="color:var(--muted)">
-        <p>Itzamiii! helps you check Nintendo eShop prices, follow games, and find the best deals for Nintendo Switch worldwide. Stay updated on discounts, track your favorite titles, and never miss a promotion.</p>
+        <p>Itzamiii! helps you check Nintendo eShop prices, follow games, and find the best deals for Nintendo Switch worldwide. Stay updated on discounts, track your favorite titles, and never miss a promotion. Compare prices across multiple countries, explore historical price data, and receive alerts when followed games go on sale. Create custom search tabs, apply filters, and sort results your way while browsing 20 supported countries in your local currency. Itzamiii! also includes Dark Mode and is completely free of ads.</p>
       </div>
     </section>
 
@@ -182,7 +216,7 @@
 
     <section class="card" aria-label="About this app">
       <div style="color:var(--muted)">
-        <p>Itzamiii! helps you check Nintendo eShop prices, follow games, and find the best deals for Nintendo Switch worldwide. Stay updated on discounts, track your favorite titles, and never miss a promotion.</p>
+        <p>Check Nintendo eShop prices, follow games, and find the best deals for Nintendo Switch worldwide. Stay updated on discounts, track your favorite titles, and never miss a promotion.</p>
         <p>Compare prices across multiple countries, explore historical price data, and receive alerts when the games you follow go on sale. By signing in with a Google account, you can save your followed games to the cloud and keep your list synced across devices.</p>
         <p>Organize the way you browse by creating custom search tabs, applying multiple filters, and sorting results according to your preferences. The app supports 20 countries and offers its interface in 9 languages: English, Brazilian Portuguese, European Portuguese, European Spanish, Latin American Spanish, Dutch, German, French, and Italian.</p>
         <p>Itzamiii! also includes Dark Mode, works without the need for a user account for browsing prices, and is completely free of ads.</p>
